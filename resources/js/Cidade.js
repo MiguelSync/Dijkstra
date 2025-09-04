@@ -15,5 +15,8 @@ class Cidade {
     addAresta(rotuloAresta, cidade, custo) {
         let aresta = new Aresta(rotuloAresta, cidade, custo);
         this.arestas.push(aresta);
+
+        aresta = new Aresta(rotuloAresta, this, custo);
+        cidade.arestas.push(aresta);
     }
 }
