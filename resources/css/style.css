@@ -1,14 +1,65 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: black;
 }
 
 
+.inputCalcula {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100vh;
+    height: 50%;
+    background-color: brown;
+    padding-block: 6rem;
+}
+
+.input {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.seta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    width: 40px;
+    height: 40px;
+}
+
+.inputs {
+    padding-block: .7rem;
+    padding-inline: 2rem;
+    font-size: 18px;
+    color: black;
+}
+
+.titleDestino {
+    color: white;
+}
+
+.button {
+    padding-block: 1rem;
+    padding-inline: 2rem;
+}
+
+.inicio {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fim {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
