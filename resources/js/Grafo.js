@@ -39,7 +39,7 @@ class Grafo {
      * Calcula a distância mínima entre dois pontos
      * @param {integer} idVerticeInicio 
      * @param {integer} idVerticeFinal 
-     * @returns 
+     * @returns {array}
      */
     calculaDistanciaMinima(idVerticeInicio, idVerticeFinal) {
         let vertices = this.vertices;
@@ -47,6 +47,7 @@ class Grafo {
         let pais = [];
         let visitados = [];
         let i;
+        let elementoVerticesResultado = document.getElementById('vertices-resultado');
 
         for (i in vertices) {
             distancias[vertices[i].id] = Infinity;
@@ -63,6 +64,11 @@ class Grafo {
             for (let i = 0; i < vizinhos.length; i++) {
                 let aresta = vizinhos[i];
                 let cidadeDestino = aresta.cidadeDestino;
+
+                if (visitados.includes(cidadeDestino.id)) {
+                    continue;
+                }
+
                 let novaDistancia = distanciaAtual + aresta.custo;
 
                 if (novaDistancia < distancias[cidadeDestino.id]) {
@@ -79,12 +85,31 @@ class Grafo {
         let caminho = idVerticeFinal;
         let path = [];
 
-        for (i in pais) {
-            path[i] = pais[caminho] + ' -> ' + caminho + ' Custo (' + distancias[caminho] + ')';
+        while (caminho != idVerticeInicio) {
+            let vertice = this.getVerticeById(caminho);
+            let elementoVertice = this.criaElementoVertice(vertice);
+            path.push(elementoVertice);
+
+            // Se não tiver vértice pai, não cria a seta
+            if (pais[caminho] == undefined) {
+                continue;
+            }
+
+            let aresta = vertice.getArestaByCidadeDestino(pais[caminho]);
+            let elementoAresta = this.criaElementoSeta(aresta);
+            path.push(elementoAresta);
             caminho = pais[caminho];
         }
 
-        return path;
+        let vertice = this.getVerticeById(idVerticeInicio);
+        let elementoVertice = this.criaElementoVertice(vertice);
+        path.push(elementoVertice);
+
+        path = path.reverse();
+        
+        for (i in path) {
+            elementoVerticesResultado.appendChild(path[i]);
+        }
     }
 
     /**
@@ -94,11 +119,13 @@ class Grafo {
      */
     getProximaCidadeComMenorCustoNaoVisitada(distancias, visitados) {
         let bkpDistancias = {};
-        let i;
+        let i = 1;
 
         for (i in distancias) {
             bkpDistancias[i] = distancias[i];
         }
+
+        i = 0;
 
         for (i in visitados) {
             bkpDistancias[visitados[i]] = Infinity;
@@ -108,6 +135,8 @@ class Grafo {
         let proximaCidade = idCidades[0];
         let menorCusto = Infinity;
 
+        i = 1;
+
         for (i in bkpDistancias) {
             if (bkpDistancias[i] < menorCusto) {
                 proximaCidade = i;
@@ -116,5 +145,30 @@ class Grafo {
         }
 
         return this.getVerticeById(proximaCidade);
+    }
+
+    /**
+     * Cria um novo elemento de vértice para ser exibido como resultado
+     * @param {Cidade} vertice 
+     * @return {span}
+     */
+    criaElementoVertice(vertice) {
+        let elementoVertice = document.createElement('span');
+        elementoVertice.classList.add('vertice');
+        elementoVertice.innerHTML = vertice.rotulo;
+        return elementoVertice;
+    }
+
+    /**
+     * Cria um novo elemento de seta para ser exibido como resultado
+     * @param {Aresta} aresta
+     * @return {span}
+     */
+    criaElementoSeta(aresta) {
+        let elementoSeta = document.createElement('span');
+        elementoSeta.classList.add('setaResultado');
+        let conteudo = aresta.rotulo + '(' + aresta.custo + ')';
+        elementoSeta.innerHTML = conteudo;
+        return elementoSeta;
     }
 }

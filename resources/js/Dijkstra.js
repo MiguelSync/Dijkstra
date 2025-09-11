@@ -124,5 +124,6 @@ function calculaDistanciaMinima() {
         }); 
         return   
     }
+
     grafo.calculaDistanciaMinima(idVerticeInicio, idVerticeFinal);
 }

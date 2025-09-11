@@ -19,4 +19,22 @@ class Cidade {
         aresta = new Aresta(rotuloAresta, this, custo);
         cidade.arestas.push(aresta);
     }
+
+    /**
+     * Retorna a aresta a partir da cidade de destino
+     * @param {integer} cidadeDestino 
+     * @returns {Aresta|false}
+     */
+    getArestaByCidadeDestino(cidadeDestino) {
+        let arestas = this.arestas;
+        let arestaDesejada = false;
+
+        for (let i = 0; i < arestas.length; i++) {
+            if (arestas[i].cidadeDestino = cidadeDestino) {
+                arestaDesejada = arestas[i];   
+            }
+        }
+
+        return arestaDesejada;
+    }
 }
