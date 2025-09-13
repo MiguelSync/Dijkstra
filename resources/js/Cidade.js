@@ -30,8 +30,9 @@ class Cidade {
         let arestaDesejada = false;
 
         for (let i = 0; i < arestas.length; i++) {
-            if (arestas[i].cidadeDestino = cidadeDestino) {
+            if (arestas[i].cidadeDestino.id == cidadeDestino) {
                 arestaDesejada = arestas[i];   
+                break;
             }
         }
 
