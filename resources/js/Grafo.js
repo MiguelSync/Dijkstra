@@ -47,7 +47,12 @@ class Grafo {
         let pais = [];
         let visitados = [];
         let i;
-        let elementoVerticesResultado = document.getElementById('vertices-resultado');
+        let elementoVerticesResultado = document.getElementById('resumo-container');
+        let elementosResultadoAtual = elementoVerticesResultado.children;
+
+        while (elementosResultadoAtual.length > 0) {
+            elementoVerticesResultado.removeChild(elementosResultadoAtual[0]);
+        }
 
         for (i in vertices) {
             distancias[vertices[i].id] = Infinity;
@@ -84,7 +89,6 @@ class Grafo {
 
         let caminho = idVerticeFinal;
         let path = [];
-
         while (caminho != idVerticeInicio) {
             let vertice = this.getVerticeById(caminho);
             let elementoVertice = this.criaElementoVertice(vertice);
