@@ -49,10 +49,13 @@ class Grafo {
         let i;
         let elementoVerticesResultado = document.getElementById('resumo-container');
         let elementosResultadoAtual = elementoVerticesResultado.children;
+        let insereCustoTotal = document.getElementById('custoTotal'); 
 
         while (elementosResultadoAtual.length > 0) {
             elementoVerticesResultado.removeChild(elementosResultadoAtual[0]);
         }
+
+        insereCustoTotal.innerHTML = 'Custo total: ';
 
         for (i in vertices) {
             distancias[vertices[i].id] = Infinity;
@@ -114,6 +117,8 @@ class Grafo {
         for (i in path) {
             elementoVerticesResultado.appendChild(path[i]);
         }
+        
+        insereCustoTotal.innerHTML += distancias[idVerticeFinal] + ' Km';
     }
 
     /**
@@ -171,7 +176,7 @@ class Grafo {
     criaElementoSeta(aresta) {
         let elementoSeta = document.createElement('span');
         elementoSeta.classList.add('setaResultado');
-        let conteudo = aresta.rotulo + '(' + aresta.custo + ')';
+        let conteudo = aresta.custo + ' Km - ' + aresta.rotulo;
         elementoSeta.innerHTML = conteudo;
         return elementoSeta;
     }
