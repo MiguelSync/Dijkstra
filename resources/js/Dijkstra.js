@@ -98,8 +98,6 @@ function onLoadDijkstra() {
  * Calcula a distância mínima entre dois pontos
  */
 function calculaDistanciaMinima() {
-    
-
     let cidadeInicio = document.getElementById('cidadeInicio');
     let cidadeFim = document.getElementById('cidadeFim');
     
