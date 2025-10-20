@@ -29,6 +29,7 @@ class Grafo {
         for (i in vertices) {
             if (vertices[i].id == id) {
                 vertice = vertices[i];
+                break;
             }
         }
 
